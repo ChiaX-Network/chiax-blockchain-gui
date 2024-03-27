@@ -35,6 +35,7 @@ type Transaction = {
     senderPuzzleHash: string;
     timeLock: number;
     spent: boolean;
+    isStakeFarm?: boolean;
   };
 };
 

@@ -7,7 +7,7 @@ import {
   CopyToClipboard,
   truncateValue,
 } from '@xxch-network/core';
-import { Trans } from '@lingui/macro';
+import {t, Trans} from '@lingui/macro';
 import {Box, Grid, Tooltip} from '@mui/material';
 import React from 'react';
 
@@ -16,6 +16,7 @@ import useWalletHumanValue from "../../hooks/useWalletHumanValue";
 
 import StakeHistory from "./StakeHistory";
 import StakeSend from "./StakeSend";
+import {StakeValue} from "@xxch-network/api";
 
 type StakeFarmProps = {
   walletId: number;
@@ -42,7 +43,9 @@ export default function StakeCategoryFarm(props: StakeFarmProps) {
   const balanceOther = useWalletHumanValue(wallet, stakeInfo?.balanceOther, unit);
   const address = stakeInfo?.address || '';
   const stakeList = stakeInfo?.stakeList || [];
+  const stakeOldList = stakeInfo?.stakeOldList || [];
   const stakeMin = stakeInfo?.stakeMin || 0;
+
 
   return (
       <Flex gap={2} flexDirection="column">
@@ -104,7 +107,7 @@ export default function StakeCategoryFarm(props: StakeFarmProps) {
                     </Flex>
                   </Flex>
                 }>
-                <span> {truncateValue(address, {leftLength: 12, rightLength: 6})}</span>
+                <span> {truncateValue(address, {leftLength: 2, rightLength: 6})}</span>
               </Tooltip>}
               error={error}
             />
@@ -113,13 +116,14 @@ export default function StakeCategoryFarm(props: StakeFarmProps) {
         <StakeSend
           walletId={walletId}
           isStakeFarm
-          stakeList={stakeList}
           stakeMin={stakeMin}
+          stakeList={stakeList}
         />
         <StakeHistory
           walletId={walletId}
           isStakeFarm
           stakeList={stakeList}
+          stakeOldList={stakeOldList}
         />
       </Flex>
   );

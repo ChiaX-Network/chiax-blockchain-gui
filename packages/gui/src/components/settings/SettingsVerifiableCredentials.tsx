@@ -17,7 +17,7 @@ export default function SettingsStartup() {
       <Grid item>
         <Flex flexDirection="column" gap={1}>
           <SettingsLabel>
-            <Trans>Verifiable Credentials</Trans>
+            <Trans>DashboardSideBar</Trans>
           </SettingsLabel>
 
           <FormGroup>
@@ -30,7 +30,8 @@ export default function SettingsStartup() {
               }
               label={<Trans>Enable Verifiable Credentials</Trans>}
             />
-          </FormGroup>          <FormGroup>
+          </FormGroup>
+          <FormGroup>
             <FormControlLabel
               control={
                 <Switch

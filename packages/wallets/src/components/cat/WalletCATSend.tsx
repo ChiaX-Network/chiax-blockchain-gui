@@ -128,8 +128,8 @@ export default function WalletCATSend(props: Props) {
       }
     }
 
-    if (address.slice(0, 12) === 'xxch_addr://') {
-      address = address.slice(12);
+    if (address.slice(0, 16) === 'xxch_addr://') {
+      address = address.slice(16);
     }
     if (address.startsWith('0x') || address.startsWith('0X')) {
       address = address.slice(2);

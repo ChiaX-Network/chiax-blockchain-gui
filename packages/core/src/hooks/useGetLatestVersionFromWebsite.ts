@@ -26,7 +26,7 @@ export default function useGetLatestVersionFromWebsite(): UseGetLatestVersionFro
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [latestVersionURL] = useLocalStorage<string>(
     'latestVersionURL',
-    'https://www.xxch.cc/downloads/latest.json'
+    'https://download.xxch.cc/latest/latest.json'
   );
   const [skipVersions, setSkipVersions] = useLocalStorage<string[]>('skipVersions', []);
   const { version: appVersion } = useAppVersion();

@@ -8,7 +8,7 @@ msgstr ""
 "Language: ko_KR\n"
 "Project-Id-Version: 1263bc1f20e1271bda78e84d2f4a6562\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-14 22:49\n"
+"PO-Revision-Date: 2023-10-08 00:04\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -34,7 +34,7 @@ msgstr "{0, plural, one {mojo} other {mojos}}"
 msgid "{minPassphraseLength, plural, one {Passphrases must be at least # character in length} other {Passphrases must be at least # characters in length}}"
 msgstr "{minPassphraseLength, plural, one {Passphrases must be at least # character in length} other {Passphrases must be at least # characters in length}}"
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:96
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:95
 msgid "A new version of Xxch is available!"
 msgstr ""
 
@@ -74,11 +74,11 @@ msgstr "취소"
 msgid "Check for updates"
 msgstr ""
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:94
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:93
 msgid "Checking for updates..."
 msgstr ""
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:111
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:110
 #: src/screens/SelectKey/SelectKeyDetailDialog.tsx:47
 #: src/screens/SelectKey/SelectKeyDetailDialog.tsx:70
 msgid "Close"
@@ -95,6 +95,10 @@ msgstr "복사됨"
 #: src/components/CopyToClipboard/CopyToClipboard.tsx:42
 msgid "Copy to Clipboard"
 msgstr "클립보드에 복사"
+
+#: src/screens/SelectKey/SelectKey.tsx:170
+#~ msgid "Create a new private key"
+#~ msgstr "Create a new private key"
 
 #: src/screens/SelectKey/SelectKey.tsx:274
 msgid "Create a new wallet key"
@@ -184,9 +188,9 @@ msgstr "농부 퍼블릭 키"
 msgid "Farming"
 msgstr "재배 중"
 
-#: src/components/EstimatedFee/EstimatedFee.tsx:338
-#: src/components/EstimatedFee/EstimatedFee.tsx:372
-#: src/components/Fee/Fee.tsx:44
+#: src/components/EstimatedFee/EstimatedFee.tsx:341
+#: src/components/EstimatedFee/EstimatedFee.tsx:375
+#: src/components/Fee/Fee.tsx:45
 msgid "Fee"
 msgstr "수수료"
 
@@ -198,11 +202,7 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr "자주 묻는 질문"
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:122
-msgid "Go To Download"
-msgstr ""
-
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:134
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:121
 msgid "Go To Download Page"
 msgstr ""
 
@@ -227,7 +227,11 @@ msgstr "고급 옵션 숨기기"
 msgid "Import Existing"
 msgstr ""
 
-#: src/components/Fee/Fee.tsx:32
+#: src/screens/SelectKey/SelectKey.tsx:181
+#~ msgid "Import from Mnemonics (12 or 24 words)"
+#~ msgstr ""
+
+#: src/components/Fee/Fee.tsx:33
 msgid "Incorrect value"
 msgstr "올바르지 않은 값"
 
@@ -235,7 +239,7 @@ msgstr "올바르지 않은 값"
 msgid "Language"
 msgstr "언어설정"
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:58
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:57
 msgid "Latest Version:"
 msgstr ""
 
@@ -243,15 +247,15 @@ msgstr ""
 msgid "Light"
 msgstr "밝은 테마"
 
-#: src/components/EstimatedFee/EstimatedFee.tsx:227
+#: src/components/EstimatedFee/EstimatedFee.tsx:230
 msgid "Likely in {0} seconds"
 msgstr ""
 
-#: src/components/EstimatedFee/EstimatedFee.tsx:224
+#: src/components/EstimatedFee/EstimatedFee.tsx:227
 msgid "Likely in {minutes} minutes"
 msgstr ""
 
-#: src/components/EstimatedFee/EstimatedFee.tsx:226
+#: src/components/EstimatedFee/EstimatedFee.tsx:229
 msgid "Likely in >5 minutes"
 msgstr ""
 
@@ -262,6 +266,19 @@ msgstr ""
 #: src/screens/SelectKey/SelectKey.tsx:236
 msgid "Loading keys"
 msgstr ""
+
+#: src/screens/SelectKey/SelectKey.tsx:117
+#~ msgid "Loading list of the keys"
+#~ msgstr "Loading list of the keys"
+
+#: src/components/LayoutDashboard/LayoutDashboard.tsx:317
+#: src/components/LayoutDashboard/LayoutDashboard.tsx:336
+#~ msgid "Log Out"
+#~ msgstr ""
+
+#: src/components/LayoutDashboard/LayoutDashboard.tsx:335
+#~ msgid "Logout"
+#~ msgstr ""
 
 #: src/hooks/useKeyringMigrationPrompt.tsx:17
 msgid "Migrate"
@@ -295,6 +312,10 @@ msgstr "24 단어의 씨드가 없습니다, 나중에 키를 가져 옵니다."
 #: src/components/FormatConnectionStatus/FormatConnectionStatus.tsx:33
 msgid "Not connected"
 msgstr "연결되지 않음"
+
+#: src/screens/SelectKey/WalletStatus.tsx:61
+#~ msgid "Not Synced"
+#~ msgstr ""
 
 #: src/components/AlertDialog/AlertDialog.tsx:23
 #: src/components/ConfirmDialog/ConfirmDialog.tsx:30
@@ -334,11 +355,15 @@ msgstr "퍼블릭 키:"
 msgid "Random"
 msgstr ""
 
-#: src/components/Fee/Fee.tsx:18
-msgid "Recommended value: 0.000005"
+#: src/components/Fee/Fee.tsx:19
+msgid "Recommended value: {0}"
 msgstr ""
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:72
+#: src/components/Fee/Fee.tsx:18
+#~ msgid "Recommended value: 0.000005"
+#~ msgstr ""
+
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:71
 msgid "Release Notes"
 msgstr ""
 
@@ -384,6 +409,10 @@ msgstr ""
 msgid "Seed:"
 msgstr "시드:"
 
+#: src/screens/SelectKey/SelectKey.tsx:134
+#~ msgid "Select Key"
+#~ msgstr "Select Key"
+
 #: src/components/Dropdown/Dropdown.tsx:28
 msgid "Select..."
 msgstr "선택..."
@@ -406,6 +435,10 @@ msgstr "설정"
 msgid "Show Advanced Options"
 msgstr "고급 옵션 표시"
 
+#: src/screens/SelectKey/SelectKey.tsx:139
+#~ msgid "Sign In"
+#~ msgstr "Sign In"
+
 #: src/components/LayoutDashboard/LayoutDashboard.tsx:136
 #: src/hooks/useValidateChangePassphraseParams.tsx:51
 msgid "Skip"
@@ -418,6 +451,14 @@ msgstr "암호 보호 건너뛰기"
 #: src/components/ErrorBoundary/ErrorBoundary.tsx:67
 msgid "Something went wrong"
 msgstr "문제가 발생함"
+
+#: src/screens/SelectKey/WalletStatus.tsx:73
+#~ msgid "Synced"
+#~ msgstr ""
+
+#: src/screens/SelectKey/WalletStatus.tsx:85
+#~ msgid "Syncing"
+#~ msgstr ""
 
 #: src/hooks/useValidateChangePassphraseParams.tsx:29
 msgid "The provided passphrase and confirmation do not match"
@@ -459,6 +500,10 @@ msgstr "다시 시도"
 msgid "Unable to load keys"
 msgstr ""
 
+#: src/screens/SelectKey/SelectKey.tsx:128
+#~ msgid "Unable to load the list of the keys"
+#~ msgstr "Unable to load the list of the keys"
+
 #: src/components/LocaleToggle/LocaleToggle.tsx:44
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -472,7 +517,7 @@ msgstr "변경 내용이 저장되지 않음"
 msgid "Using a passphrase is strongly recommended to protect your keys. Are you sure you want to disable passphrase protection?"
 msgstr "키를 보호하려면 암호를 사용하는 것이 좋습니다. 암호 보호를 비활성화하시겠습니까?"
 
-#: src/components/Fee/Fee.tsx:24
+#: src/components/Fee/Fee.tsx:25
 msgid "Value seems high"
 msgstr "값이 높음"
 
@@ -494,12 +539,16 @@ msgstr ""
 msgid "Wallet Keys"
 msgstr ""
 
+#: src/screens/SelectKey/SelectKey.tsx:142
+#~ msgid "Welcome to Xxch. Please log in with an existing key, or create a new key."
+#~ msgstr "Welcome to Xxch. Please log in with an existing key, or create a new key."
+
 #: src/components/LayoutDashboard/LayoutDashboard.tsx:142
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:67
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:66
 msgid "What's New"
 msgstr ""
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:83
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:82
 msgid "Xxch {latestVersion} is currently the latest version available."
 msgstr ""
 
@@ -512,11 +561,11 @@ msgstr ""
 msgid "You have made changes. Do you want to discard them?"
 msgstr "변경했습니다. 삭제하시겠습니까?"
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:98
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:97
 msgid "You're up to date"
 msgstr ""
 
-#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:50
+#: src/components/LayoutDashboard/NewerAppVersionAvailable.tsx:49
 msgid "Your Current Version:"
 msgstr ""
 

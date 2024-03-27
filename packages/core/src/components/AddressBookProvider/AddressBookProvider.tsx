@@ -9,21 +9,12 @@ const initialState = {
 export const AddressBookContext = createContext(initialState);
 
 export default function AddressBookProvider({ children }) {
-  const [
-    addressBook, addContact, removeContact,
-    getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress
-  ] =
+  const [addressBook, addContact, removeContact, getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress] =
     useAddressBook();
 
   const value = useMemo(
-    () => [
-      addressBook, addContact, removeContact,
-      getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress
-    ],
-    [
-      addressBook, addContact, removeContact,
-      getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress
-    ]
+    () => [addressBook, addContact, removeContact, getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress],
+    [addressBook, addContact, removeContact, getContactByContactId, editContact, getContactByAddress, getContactByStakeAddress]
   );
 
   return <AddressBookContext.Provider value={value}>{children}</AddressBookContext.Provider>;

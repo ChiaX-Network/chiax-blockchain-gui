@@ -5,7 +5,7 @@ import {
   Flex,
   CardSimple,
 } from '@xxch-network/core';
-import { Trans } from '@lingui/macro';
+import {t, Trans} from '@lingui/macro';
 import { Grid } from '@mui/material';
 import React from 'react';
 
@@ -14,6 +14,7 @@ import useWalletHumanValue from "../../hooks/useWalletHumanValue";
 
 import StakeHistory from "./StakeHistory";
 import StakeSend from "./StakeSend";
+import {StakeValue} from "@xxch-network/api";
 
 type StakeRewardProps = {
   walletId: number;
@@ -38,7 +39,9 @@ export default function StakeCategoryLock(props: StakeRewardProps) {
   const balanceExp = useWalletHumanValue(wallet, stakeInfo?.balanceExp, unit);
 
   const stakeList = stakeInfo?.stakeList || [];
+  const stakeOldList = stakeInfo?.stakeOldList || [];
   const stakeMin = stakeInfo?.stakeMin || 0;
+  // const stakeForkHeight = stakeInfo?.stakeForkHeight || 0;
 
   return (
       <Flex gap={2} flexDirection="column">
@@ -81,6 +84,7 @@ export default function StakeCategoryLock(props: StakeRewardProps) {
           walletId={walletId}
           isStakeFarm={false}
           stakeList={stakeList}
+          stakeOldList={stakeOldList}
         />
       </Flex>
   );

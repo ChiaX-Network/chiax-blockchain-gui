@@ -22,13 +22,7 @@ export default function AddressBookSideBar() {
   // - contact name
   function filterArray(arrayList, search: string) {
     return arrayList.filter((item: AddressContact) => {
-      const {
-        dids,
-        domainNames,
-        addresses,
-        stakeAddresses,
-        name
-      } = item;
+      const { dids, domainNames, addresses, stakeAddresses,name } = item;
 
       if (search === '') return true;
 

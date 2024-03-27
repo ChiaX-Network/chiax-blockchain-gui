@@ -134,7 +134,7 @@ type AddressContact = {
   contactId: number;
   name: string;
   addresses: ContactAddress[];
-  stakeAddresses: ContactAddress[];
+  stakeAddresses: ContactAddress[],
   dids: ContactDID[];
   notes: string;
   nftId: string;

@@ -14,7 +14,7 @@ export default class StakeWallet extends Wallet {
       }>('find_pool_nft', args);
   }
 
-  async recoverPoolNFT(args: {launcherId: string, contractAddress: string}) {
+  async recoverPoolNFT(args: {launcherId: string, contractAddress: string, fee: number}) {
       return this.command<{
         amount: number;
         totalAmount:number;
@@ -44,7 +44,9 @@ export default class StakeWallet extends Wallet {
       balanceOther: number;
       address: string;
       stakeList: StakeValue[];
+      stakeOldList: StakeValue[];
       stakeMin: number;
+      stakeForkHeight: number;
     }>('stake_info', args);
   }
 
@@ -60,5 +62,11 @@ export default class StakeWallet extends Wallet {
       transaction: Transaction;
       transactionId: string;
     }>('stake_send', args);
+  }
+
+  async spendWithdrawCoins(args: { coinIds: string[]; fee: number | BigNumber }) {
+    return this.command<{
+      transactionIds: string[];
+    }>('spend_withdraw_coins', args);
   }
 }

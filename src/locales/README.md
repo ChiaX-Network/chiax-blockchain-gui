@@ -4,7 +4,7 @@
 >
 > This file is deprecated and will be deleted in future major release.
 >
-> Please follow the Localization from main repo [README.md](https://github.com/Chiax-Network/xxch-blockchain-gui)
+> Please follow the Localization from main repo [README.md](https://github.com/ChiaX-Network/xxch-blockchain-gui)
 
 Thanks for helping to translate the GUI for Xxch Blockchain.
 

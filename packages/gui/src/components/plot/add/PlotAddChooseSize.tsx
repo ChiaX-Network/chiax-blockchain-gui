@@ -37,7 +37,9 @@ export default function PlotAddChooseSize(props: Props) {
 
   const compressionAvailable =
     op.haveBladebitCompressionLevel &&
-    (plotterName === PlotterName.BLADEBIT_CUDA || plotterName === PlotterName.BLADEBIT_RAM);
+    (plotterName === PlotterName.BLADEBIT_CUDA || plotterName === PlotterName.BLADEBIT_RAM) &&
+    plotter.version &&
+    +plotter.version.split('.')[0] >= 3;
 
   const [allowedPlotSizes, setAllowedPlotSizes] = useState(
     getPlotSizeOptions(plotterName, compressionLevel).filter((option) => plotter.options.kSizes.includes(option.value))
@@ -91,7 +93,7 @@ export default function PlotAddChooseSize(props: Props) {
           {
             'You do not need to be synced or connected to plot. Temporary files are created during the plotting process which exceed the size of the final plot files. Make sure you have enough space. '
           }
-          <Link target="_blank" href="https://github.com/Chiax-Network/xxch-blockchain/wiki/k-sizes">
+          <Link target="_blank" href="https://github.com/Chia-Network/chia-blockchain/wiki/k-sizes">
             Learn more
           </Link>
         </Trans>

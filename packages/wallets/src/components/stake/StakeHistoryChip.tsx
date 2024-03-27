@@ -1,6 +1,6 @@
-import type { Transaction } from '@xxch-network/api';
-import {  useGetTimestampForHeightQuery, useGetHeightInfoQuery } from '@xxch-network/api-react';
-import { useTrans } from '@xxch-network/core';
+import {toBech32m, Transaction} from '@xxch-network/api';
+import {useGetTimestampForHeightQuery, useGetHeightInfoQuery, useGetAutoWithdrawStakeQuery} from '@xxch-network/api-react';
+import { useTrans, Button } from '@xxch-network/core';
 import { defineMessage } from '@lingui/macro';
 import { AccessTime as AccessTimeIcon } from '@mui/icons-material';
 import { Chip } from '@mui/material';
@@ -9,12 +9,15 @@ import React from 'react';
 
 type Props = {
   transactionRow: Transaction;
-  isStakeFarm: boolean;
+  feeUnit: string;
+  setStakeWithdrawDialogProps: (props: object) => void;
 };
 
 export default function StakeHistoryChip(props: Props) {
-  const { transactionRow,isStakeFarm } = props;
+  const { transactionRow, feeUnit, setStakeWithdrawDialogProps } = props;
 
+  const { data: autoWithdrawData, isLoading: isGetAutoWithdrawLoading } = useGetAutoWithdrawStakeQuery();
+  const isAutoWithdrawEnabled = !isGetAutoWithdrawLoading && autoWithdrawData?.enabled;
 
   const { data: height, isLoading: isGetHeightInfoLoading } = useGetHeightInfoQuery(undefined, {
     pollingInterval: 3000,
@@ -31,11 +34,14 @@ export default function StakeHistoryChip(props: Props) {
   if (isGetHeightInfoLoading || isGetTimestampForHeightLoading || !lastBlockTimeStamp) return null;
 
   let text = '';
+  let Icon;
+  let onClick;
   let color = '';
   const canBeWithdrawAt = moment(transactionRow.createdAtTime * 1000);
   if (transactionRow.metadata?.timeLock) {
     canBeWithdrawAt.add(transactionRow.metadata.timeLock, 'seconds');
   }
+  const isStakeFarm = transactionRow.metadata?.isStakeFarm;
   const currentTime = moment.unix(lastBlockTimeStamp - 20);
   // extra 20 seconds so if the auto withdraw stake is enabled, it will not show to button to withdraw it
   // console.log('currentTime___: ', currentTime.format());
@@ -46,22 +52,45 @@ export default function StakeHistoryChip(props: Props) {
 
   if (timeLeft > 0) {
     color = timeLeft < 86_400 ? 'warning' : 'default';
+    Icon = <AccessTimeIcon />;
     text = t(
       isStakeFarm ? defineMessage({message: 'Stake in '}) : defineMessage({message: 'Lock in '})
     )+canBeWithdrawAt.from(currentTime, true); // ... 3 days
   } else if (transactionRow.sent === 0) {
-    color = 'success'
-    text = t(
-      defineMessage({
-        message: 'Ready to withdraw',
-      })
-    );
+    const address = toBech32m(transactionRow.metadata?.recipientPuzzleHash??'', feeUnit)
+    color = 'success';
+    text = isAutoWithdrawEnabled
+      ? t(
+          defineMessage({
+            message: 'Will be auto withdraw',
+          })
+        )
+      : t(
+          defineMessage({
+            message: 'Can be withdraw',
+          })
+        );
+    onClick = () =>
+      setStakeWithdrawDialogProps({
+        coinId: transactionRow.metadata?.coinId,
+        amountInMojo: transactionRow.amount,
+        address,
+      });
   } else {
-    color = 'primary'
+    color = 'primary';
+    Icon = <AccessTimeIcon />;
     text = t(
       defineMessage({
         message: 'Withdrawing...',
       })
+    );
+  }
+
+  if (onClick) {
+    return (
+      <Button variant="outlined" color="primary" onClick={onClick} size="small">
+        {text}
+      </Button>
     );
   }
   return (
@@ -69,7 +98,7 @@ export default function StakeHistoryChip(props: Props) {
       size="small"
       variant="outlined"
       color={color}
-      icon={<AccessTimeIcon />}
+      icon={Icon}
       label={<>{text}</>}
     />
   );

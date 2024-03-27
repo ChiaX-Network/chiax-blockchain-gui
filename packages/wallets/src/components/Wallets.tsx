@@ -1,4 +1,6 @@
-import { LayoutDashboardSub } from '@xxch-network/core';
+import {
+  LayoutDashboardSub,
+} from '@xxch-network/core';
 import React from 'react';
 import { Navigate, Routes, Route } from 'react-router-dom';
 

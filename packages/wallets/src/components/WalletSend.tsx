@@ -153,8 +153,8 @@ export default function WalletSend(props: SendCardProps) {
       throw new Error(t`Cannot send xxch to coloured address. Please enter a xxch address.`);
     }
 
-    if (address.slice(0, 12) === 'xxch_addr://') {
-      address = address.slice(12);
+    if (address.slice(0, 16) === 'xxch_addr://') {
+      address = address.slice(16);
     }
     if (address.startsWith('0x') || address.startsWith('0X')) {
       address = address.slice(2);

@@ -210,11 +210,13 @@ export const {
   useSetAutoClaimMutation,
   useGetAutoClaimQuery,
   useSpendClawbackCoinsMutation,
+
   // stake
   useSetAutoWithdrawStakeMutation,
   useGetAutoWithdrawStakeQuery,
   useStakeInfoQuery,
   useStakeSendMutation,
+  useSpendWithdrawCoinsMutation,
 
   useFindPoolNFTMutation,
   useRecoverPoolNFTMutation,

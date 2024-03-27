@@ -50,7 +50,7 @@ type SendTransactionData = {
 };
 
 export default function StakeSend(props: SendCardProps) {
-  const { walletId, stakeList,stakeMin , isStakeFarm} = props;
+  const { walletId, isStakeFarm, stakeMin , stakeList} = props;
   const [submissionCount, setSubmissionCount] = React.useState(0);
   const openDialog = useOpenDialog();
   const [stakeSend, { isLoading: isStakeSendLoading }] = useStakeSendMutation();
@@ -65,9 +65,7 @@ export default function StakeSend(props: SendCardProps) {
   });
 
 
-  const {
-    watch, formState: { isSubmitting },
-  } = methods;
+  const {watch, formState: { isSubmitting }} = methods;
 
   const { data: walletState, isLoading: isWalletSyncLoading } = useGetSyncStatusQuery(
     {},
@@ -85,8 +83,8 @@ export default function StakeSend(props: SendCardProps) {
   const syncing = !!walletState?.syncing;
 
   function stakeDisplayName(val: StakeValue): string {
-    return ` ${val.timeLock/86_400} ${t`days`} (${isStakeFarm?val.coefficient:
-      `${parseFloat((parseFloat(val.coefficient)*10_000).toFixed(1))}‱`})`;
+    return ` ${val.timeLock/86_400} ${t`days`} (${val.coefficient}${val.rewardCoefficient == null?``:
+      `/${parseFloat((parseFloat(val.rewardCoefficient)*10_000).toFixed(1))}‱`})`;
   }
 
   async function handleSubmit(data: SendTransactionData) {
@@ -112,6 +110,8 @@ export default function StakeSend(props: SendCardProps) {
     const fee = data.fee.trim() || '0';
     if (!isNumeric(fee)) {
       throw new Error(t`Please enter a valid numeric fee`);
+    } else if (parseFloat(fee) < 0.1) {
+      throw new Error(t`Please enter stake fee >= 0.1`);
     }
 
     const address = data.address.trim();
@@ -175,6 +175,7 @@ export default function StakeSend(props: SendCardProps) {
                 <InputLabel required focused>
                   { isStakeFarm ? <Trans>Stake Period</Trans> : <Trans>Lock Period</Trans>}
                 </InputLabel>
+                {stakeList.length && (
                  <Select name="stakeType" disabled={isSubmitting}>
                     {stakeList.map((val, index) => (
                       <MenuItem value={index} key={val.timeLock}>
@@ -182,6 +183,7 @@ export default function StakeSend(props: SendCardProps) {
                       </MenuItem>
                     ))}
                   </Select>
+                  )}
               </FormControl>
             </Grid>
             <Grid xs={12} md={4} item>
@@ -207,7 +209,7 @@ export default function StakeSend(props: SendCardProps) {
                 label={<Trans>Fee</Trans>}
                 data-testid="WalletStakeSend-fee"
                 fullWidth
-                txType={FeeTxType.walletSendXXCH}
+                txType={FeeTxType.walletStakeXXCH}
               />
             </Grid>
           </Grid>

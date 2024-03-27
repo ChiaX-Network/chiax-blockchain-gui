@@ -1,79 +1,36 @@
-import { useGetAutoWithdrawStakeQuery, useSetAutoWithdrawStakeMutation } from '@xxch-network/api-react';
-import { Flex, Form, ButtonLoading, Fee, SettingsLabel, xxchToMojo, mojoToXxch, toExponential } from '@xxch-network/core';
+import { useLocalStorage } from '@xxch-network/api-react';
+import { Flex, SettingsHR, SettingsSection, SettingsText } from '@xxch-network/core';
 import { Trans } from '@lingui/macro';
-import {Box} from '@mui/material';
-import React, {useEffect} from 'react';
-import { useForm } from 'react-hook-form';
+import { Grid, Box } from '@mui/material';
+import React from 'react';
 
-export default function SettingsStake(props) {
-  const {
-    data: withdrawStake,
-    isLoading
-  } = useGetAutoWithdrawStakeQuery();
+import SettingsStakeAutoWithdraw from './SettingsStakeAutoWithdraw';
 
-  const [
-    setAutoWithdrawStake,
-    { isLoading: isSetWithdrawStakeLoading }
-  ] = useSetAutoWithdrawStakeMutation();
-
-  const autoWithdrawStakeFee = toExponential(
-    withdrawStake?.txFee ? mojoToXxch(withdrawStake.txFee).toNumber() : 0
+export default function SettingsStake() {
+  const [wasSettingsStakeVisited, setWasSettingsStakeVisited] = useLocalStorage<boolean>(
+    'newFlag--wasSettingsStakeVisited',
+    false
   );
-  const methods = useForm({
-    defaultValues: {
-      fee: autoWithdrawStakeFee
+
+  React.useEffect(() => {
+    if (!wasSettingsStakeVisited) {
+      setWasSettingsStakeVisited(true);
     }
-  });
-
-  useEffect(() => {
-    if (autoWithdrawStakeFee !== null && autoWithdrawStakeFee !== undefined) {
-      methods.setValue('fee', autoWithdrawStakeFee);
-    }
-  }, [autoWithdrawStakeFee, methods]);
-
-  async function handleSubmit({ fee }: { fee: number }) {
-    const feeInMojos = xxchToMojo(fee);
-    await setAutoWithdrawStake({
-      txFee: feeInMojos,
-      batchSize: 50,
-    }).unwrap();
-
-    // hook form does not reset isDirty after submit
-    methods.reset({}, { keepValues: true });
-  }
+  }, [wasSettingsStakeVisited, setWasSettingsStakeVisited]);
 
   return (
-    <Box sx={{ width: '100%' }} {...props}>
-      <SettingsLabel>
-        <Trans>Auto Withdraw Stake</Trans>
-      </SettingsLabel>
-      <Form methods={methods}  onSubmit={handleSubmit}>
-        <Flex flexDirection="column" gap={1}>
-          <Flex gap={2} sx={{ marginTop: 1, alignItems: 'flex-start' }}>
-            <Fee
-              id="filled-secondary"
-              name="fee"
-              size="small"
-              color="secondary"
-              disabled={isSetWithdrawStakeLoading || isLoading}
-              label={<Trans>Transaction auto withdraw fee</Trans>}
-              data-testid="SettingsWithdrawStake-fee"
-              fullWidth
-            />
-          </Flex>
-          <ButtonLoading
-            size="small"
-            type="submit"
-            variant="contained"
-            color="primary"
-            loading={isSetWithdrawStakeLoading}
-            disabled={!methods.formState.isDirty}
-            data-testid="SettingsWithdrawStake-save"
-          >
-           <Trans>Save</Trans>
-          </ButtonLoading>
-        </Flex>
-      </Form>
-    </Box>
+    <Grid container style={{ maxWidth: '624px' }} gap={3}>
+
+      <Box>
+        <SettingsSection>
+          <Trans>Auto withdraw stake transactions</Trans>
+        </SettingsSection>
+
+        <SettingsText>
+          <Trans>Withdraw to you automatically when the stake time period expires.</Trans>
+        </SettingsText>
+      </Box>
+      <SettingsStakeAutoWithdraw sx={{ marginTop: 1 }} />
+    </Grid>
   );
 }

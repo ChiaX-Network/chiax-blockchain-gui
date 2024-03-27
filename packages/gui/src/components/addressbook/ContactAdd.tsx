@@ -113,7 +113,7 @@ function StakeAddressFields() {
             color="secondary"
             fullWidth
             disabled={false}
-            label={<Trans>Stake Address</Trans>}
+            label={<Trans>Stake Addresses</Trans>}
           />
           <IconButton onClick={() => handleRemove(index)}>
             <Remove />
@@ -123,6 +123,7 @@ function StakeAddressFields() {
     </>
   );
 }
+
 function ProfileFields() {
   const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
@@ -252,6 +253,7 @@ export default function ContactAdd() {
     defaultValues: {
       name: '',
       addresses: [{ name: '', address: '' }],
+      stakeAddresses: [{ name: '', address: '' }],
       dids: [],
       domains: [],
       notes: '',
@@ -269,7 +271,7 @@ export default function ContactAdd() {
     const filteredStakeAddresses = data.stakeAddresses.filter((item) => item.name.length > 0 || item.address.length > 0);
     const filteredProfiles = data.dids.filter((item) => item.name.length > 0 || item.did.length > 0);
     const filteredDomains = data.domains.filter((item) => item.name.length > 0 || item.domainName.length > 0);
-    if (filteredAddresses.length === 0) throw new Error('At least one Address must be provided to create contact');
+    if (filteredAddresses.length === 0 && filteredStakeAddresses.length === 0) throw new Error('At least one Address must be provided to create contact');
     filteredAddresses.forEach((entry) => {
       try {
         if (entry.address[4] === '1') {
@@ -300,8 +302,8 @@ export default function ContactAdd() {
     });
     filteredStakeAddresses.forEach((entry) => {
       try {
-        if (entry.address[4] === '1') {
-          if (entry.address.slice(0, 4).toLowerCase() !== 'dpos') {
+        if (entry.address[10] === '1') {
+          if (entry.address.slice(0, 10).toLowerCase() !== 'dpos:xxch:') {
             throw new Error();
           } else if (fromBech32m(entry.address).length !== 64) {
             throw new Error();
@@ -322,7 +324,7 @@ export default function ContactAdd() {
     });
     filteredProfiles.forEach((entry) => {
       try {
-        if (entry.did.slice(0, 10).toLowerCase() !== 'did:xxch:') {
+        if (entry.did.slice(0, 13).toLowerCase() !== 'did:xxch:') {
           throw new Error();
         } else if (fromBech32m(entry.did).length !== 64) {
           throw new Error();

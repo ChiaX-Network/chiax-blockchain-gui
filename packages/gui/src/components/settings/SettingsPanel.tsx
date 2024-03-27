@@ -25,7 +25,6 @@ import RemovePassphrasePrompt from './RemovePassphrasePrompt';
 import SetPassphrasePrompt from './SetPassphrasePrompt';
 import SettingsDerivationIndex from './SettingsDerivationIndex';
 import SettingsExpiringOffers from './SettingsExpiringOffers';
-import SettingsStake from './SettingsStake';
 import SettingsStartup from './SettingsStartup';
 import SettingsVerifiableCredentials from './SettingsVerifiableCredentials';
 
@@ -179,7 +178,6 @@ export default function SettingsPanel() {
 
             <SettingsDerivationIndex />
           </Flex>
-          <SettingsStake />
           <SettingsStartup />
           <Flex flexDirection="column" gap={1}>
             <SettingsLabel>

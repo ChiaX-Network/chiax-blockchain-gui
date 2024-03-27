@@ -60,8 +60,8 @@ export default async function offerBuilderDataToOffer({
   assetsToUnlock: AssetStatusForOffer[];
 }> {
   const {
-    offered: { xxch: offeredXch = [], tokens: offeredTokens = [], nfts: offeredNfts = [], fee: [firstFee] = [] },
-    requested: { xxch: requestedXch = [], tokens: requestedTokens = [], nfts: requestedNfts = [] },
+    offered: { xxch: offeredXXxch = [], tokens: offeredTokens = [], nfts: offeredNfts = [], fee: [firstFee] = [] },
+    requested: { xxch: requestedXXxch = [], tokens: requestedTokens = [], nfts: requestedNfts = [] },
   } = data;
 
   const usedNFTs: string[] = [];
@@ -72,7 +72,7 @@ export default async function offerBuilderDataToOffer({
   const driverDict: Record<string, Driver> = {};
 
   if (!allowEmptyOfferColumn) {
-    const hasOffer = !!offeredXch.length || !!offeredTokens.length || !!offeredNfts.length;
+    const hasOffer = !!offeredXXxch.length || !!offeredTokens.length || !!offeredNfts.length;
 
     if (!hasOffer) {
       throw new Error(t`Please specify at least one offered asset`);
@@ -138,15 +138,15 @@ export default async function offerBuilderDataToOffer({
 
   let standardWallet: Wallet | undefined;
   let standardWalletBalance: WalletBalanceFormatted | undefined;
-  let pendingXchOffer: AssetStatusForOffer | undefined;
-  let pendingXch = new BigNumber(0);
-  if (offeredXch.length > 0 || feeInMojos.gt(0)) {
+  let pendingXXxchOffer: AssetStatusForOffer | undefined;
+  let pendingXXxch = new BigNumber(0);
+  if (offeredXXxch.length > 0 || feeInMojos.gt(0)) {
     standardWallet = wallets.find((w) => w.type === WalletType.STANDARD_WALLET);
     for (let i = 0; i < pendingOffers.length; i++) {
       const po = pendingOffers[i];
       if (po.type === 'XXCH') {
-        pendingXchOffer = po;
-        pendingXch = po.lockedAmount;
+        pendingXXxchOffer = po;
+        pendingXXxch = po.lockedAmount;
         break;
       }
     }
@@ -155,8 +155,8 @@ export default async function offerBuilderDataToOffer({
     }
   }
 
-  // offeredXch.length should be always 0 or 1
-  const xxchTasks = offeredXch.map(async (xxch) => {
+  // offeredXXxch.length should be always 0 or 1
+  const xxchTasks = offeredXXxch.map(async (xxch) => {
     const { amount } = xxch;
     if (!amount || amount === '0') {
       throw new Error(t`Please enter an XXCH amount`);
@@ -169,26 +169,26 @@ export default async function offerBuilderDataToOffer({
     walletIdsAndAmounts[standardWallet.id] = mojoAmount.negated();
 
     const spendableBalance = new BigNumber(standardWalletBalance.spendableBalance);
-    const hasEnoughTotalBalance = spendableBalance.plus(pendingXch).minus(feeInMojos).gte(mojoAmount);
+    const hasEnoughTotalBalance = spendableBalance.plus(pendingXXxch).minus(feeInMojos).gte(mojoAmount);
     if (!hasEnoughTotalBalance) {
       throw new Error(t`Amount exceeds XXCH total balance`);
     }
 
-    if (pendingXchOffer) {
-      // Assuming offeredXch.length is always less then or equal to 1
-      pendingXchOffer.spendingAmount = mojoAmount.plus(feeInMojos);
-      pendingXchOffer.spendableAmount = spendableBalance;
-      pendingXchOffer.confirmedAmount = new BigNumber(standardWalletBalance.confirmedWalletBalance);
-      const hasEnoughSpendableBalance = spendableBalance.gte(pendingXchOffer.spendingAmount);
+    if (pendingXXxchOffer) {
+      // Assuming offeredXXxch.length is always less then or equal to 1
+      pendingXXxchOffer.spendingAmount = mojoAmount.plus(feeInMojos);
+      pendingXXxchOffer.spendableAmount = spendableBalance;
+      pendingXXxchOffer.confirmedAmount = new BigNumber(standardWalletBalance.confirmedWalletBalance);
+      const hasEnoughSpendableBalance = spendableBalance.gte(pendingXXxchOffer.spendingAmount);
       if (!hasEnoughSpendableBalance) {
-        pendingXchOffer.status = 'conflictsWithNewOffer';
+        pendingXXxchOffer.status = 'conflictsWithNewOffer';
       } else {
-        pendingXchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
+        pendingXXxchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
       }
     }
   });
   // Treat fee as xxch spending
-  if (offeredXch.length === 0 && feeInMojos.gt(0)) {
+  if (offeredXXxch.length === 0 && feeInMojos.gt(0)) {
     if (!standardWallet || !standardWalletBalance) {
       throw new Error(t`No standard wallet found`);
     }
@@ -198,15 +198,15 @@ export default async function offerBuilderDataToOffer({
     if (!hasEnoughTotalBalance) {
       throw new Error(t`Fee exceeds XXCH total balance`);
     }
-    if (pendingXchOffer) {
-      pendingXchOffer.spendingAmount = feeInMojos;
-      pendingXchOffer.spendableAmount = spendableBalance;
-      pendingXchOffer.confirmedAmount = new BigNumber(standardWalletBalance.confirmedWalletBalance);
-      const hasEnoughSpendableBalance = spendableBalance.gte(pendingXchOffer.spendingAmount);
+    if (pendingXXxchOffer) {
+      pendingXXxchOffer.spendingAmount = feeInMojos;
+      pendingXXxchOffer.spendableAmount = spendableBalance;
+      pendingXXxchOffer.confirmedAmount = new BigNumber(standardWalletBalance.confirmedWalletBalance);
+      const hasEnoughSpendableBalance = spendableBalance.gte(pendingXXxchOffer.spendingAmount);
       if (!hasEnoughSpendableBalance) {
-        pendingXchOffer.status = 'conflictsWithNewOffer';
+        pendingXXxchOffer.status = 'conflictsWithNewOffer';
       } else {
-        pendingXchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
+        pendingXXxchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
       }
     }
   }
@@ -283,7 +283,7 @@ export default async function offerBuilderDataToOffer({
   await Promise.all([...xxchTasks, ...tokenTasks, ...nftTasks]);
 
   // requested
-  requestedXch.forEach((xxch) => {
+  requestedXXxch.forEach((xxch) => {
     const { amount } = xxch;
 
     // For one-sided offers where nothing is requested, we allow the amount to be '0'
@@ -343,19 +343,19 @@ export default async function offerBuilderDataToOffer({
     if (driver) {
       driverDict[id] = driver;
 
-      if (considerNftRoyalty && pendingXchOffer) {
+      if (considerNftRoyalty && pendingXXxchOffer) {
         const royaltyPercentageStr = driver.also.also?.transfer_program.royalty_percentage;
         if (royaltyPercentageStr) {
           const royaltyMultiplier = 1 + +royaltyPercentageStr / 10_000;
-          const spendingXch = pendingXchOffer.spendingAmount.minus(feeInMojos);
-          const newSpendingXch = spendingXch.multipliedBy(royaltyMultiplier).plus(feeInMojos);
-          pendingXchOffer.spendingAmount = newSpendingXch;
+          const spendingXXxch = pendingXXxchOffer.spendingAmount.minus(feeInMojos);
+          const newSpendingXXxch = spendingXXxch.multipliedBy(royaltyMultiplier).plus(feeInMojos);
+          pendingXXxchOffer.spendingAmount = newSpendingXXxch;
 
-          const hasEnoughSpendableBalance = pendingXchOffer.spendableAmount.gte(pendingXchOffer.spendingAmount);
+          const hasEnoughSpendableBalance = pendingXXxchOffer.spendableAmount.gte(pendingXXxchOffer.spendingAmount);
           if (!hasEnoughSpendableBalance) {
-            pendingXchOffer.status = 'conflictsWithNewOffer';
+            pendingXXxchOffer.status = 'conflictsWithNewOffer';
           } else {
-            pendingXchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
+            pendingXXxchOffer.status = 'alsoUsedInNewOfferWithoutConflict';
           }
         }
       }

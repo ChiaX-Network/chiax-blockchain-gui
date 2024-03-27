@@ -7,6 +7,7 @@ import React, { useMemo } from 'react';
 import { Routes, Route, matchPath, useLocation, useNavigate } from 'react-router-dom';
 
 import SettingsAdvanced from './SettingsAdvanced';
+import SettingsStake from './SettingsStake';
 import SettingsCustody from './SettingsCustody';
 import SettingsDataLayer from './SettingsDataLayer';
 import SettingsGeneral from './SettingsGeneral';
@@ -23,10 +24,18 @@ export default function Settings() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [wasSettingsCustodyVisited] = useLocalStorage<boolean>('newFlag--wasSettingsCustodyVisited', false);
+  const [wasSettingsStakeVisited] = useLocalStorage<boolean>('newFlag--wasSettingsStakeVisited', false);
 
   const settingsTabs = useMemo(() => {
     let tabs = [
       { id: 'general', label: msg`General`, Component: SettingsGeneral, path: 'general' },
+      {
+        id: 'stake',
+        label: msg`StakeSetting`,
+        Component: SettingsStake,
+        path: 'stake',
+        badge: wasSettingsStakeVisited ? undefined : 'NEW',
+      },
       {
         id: 'custody',
         label: msg`Custody`,

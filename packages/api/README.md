@@ -2,7 +2,7 @@
 
 ![Xxch logo](https://www.xxch.cc/wp-content/uploads/2022/09/xxch-logo.svg)
 
-![GitHub contributors](https://img.shields.io/github/contributors/Chiax-Network/xxch-blockchain-gui?logo=GitHub)
+![GitHub contributors](https://img.shields.io/github/contributors/chiax-network/xxch-blockchain-gui?logo=GitHub)
 
 This library provides support for TypeScript/JavaScript [Xxch](https://www.xxch.cc) apps to access the [Xxch Blockchain RPC](https://docs.xxch.cc/rpc/), by making it easier to perform the following actions:
 
@@ -24,7 +24,7 @@ import sleep from 'sleep-promise';
 
 (async () => {
   const client = new Client({
-    url: 'wss://127.0.0.1:55400',
+    url: 'wss://127.0.0.1:23320',
     // key and crt files should be in your homedir in: .xxch/mainnet/config/ssl/daemon/
     cert: readFileSync('private_cert.crt'),
     key: readFileSync('private_key.key'),
@@ -62,4 +62,4 @@ import sleep from 'sleep-promise';
 
 ## Development
 
-Please read and follow the main [README.md](https://github.com/Chiax-Network/xxch-blockchain-gui) of this monorepo.
+Please read and follow the main [README.md](https://github.com/ChiaX-Network/xxch-blockchain-gui) of this monorepo.

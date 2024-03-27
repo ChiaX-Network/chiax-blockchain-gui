@@ -1,15 +1,13 @@
 import { WalletType } from '@xxch-network/api';
 import { useDeleteUnconfirmedTransactionsMutation } from '@xxch-network/api-react';
-import { Flex, ConfirmDialog, useOpenDialog, DropdownActions, MenuItem } from '@xxch-network/core';
+import { Button, Flex, ConfirmDialog, useOpenDialog, DropdownActions, MenuItem } from '@xxch-network/core';
 import { Trans } from '@lingui/macro';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import { Typography, ListItemIcon, Tab, Tabs } from '@mui/material';
 import React, { type ReactNode } from 'react';
 
 import useWallet from "../hooks/useWallet";
-
 import WalletName from './WalletName';
-
 
 type StandardWalletProps = {
   walletId: number;
@@ -72,7 +70,7 @@ export default function WalletHeader(props: StandardWalletProps) {
             <WalletStatus height={showDebugInformation} />
           </Flex>
           */}
-
+          &nbsp;
           <DropdownActions label={<Trans>Actions</Trans>} variant="outlined">
             <MenuItem onClick={handleDeleteUnconfirmedTransactions} close>
               <ListItemIcon>

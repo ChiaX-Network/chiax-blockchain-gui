@@ -167,6 +167,8 @@ export enum FeeTxType {
   createPlotNFT = 'create_new_pool_wallet',
   claimPoolingReward = 'pw_absorb_rewards',
   createDID = 'create_new_did_wallet',
+  walletStakeXXCH = 'stake_xxch',
+  spendStakeTX = 'stake_spend',
 }
 
 type FeeProps = {
@@ -203,13 +205,14 @@ export default function EstimatedFee(props: FeeProps) {
 
   const formattedEstimates: FormattedEstimate[] = useMemo(() => {
     const estimateList = ests?.estimates ?? [0, 0, 0];
-    const defaultValues = [6_000_000, 5_000_000, 0];
+    const isStake = txType === FeeTxType.walletStakeXXCH || txType === FeeTxType.spendStakeTX;
+    const defaultValues = isStake ? [100_000_000_000] : [6_000_000, 5_000_000, 0];
     const allZeroes = estimateList.filter((value: number) => value !== 0).length === 0;
     const estList = allZeroes // update estimate list to include a 0 fee entry if not already present
-      ? defaultValues.some((val) => val === 0)
+      ? isStake || defaultValues.some((val) => val === 0)
         ? defaultValues
         : defaultValues.concat([0])
-      : estimateList.some((val) => val === 0)
+      : isStake || estimateList.some((val) => val === 0)
       ? estimateList
       : estimateList.concat([0]);
 

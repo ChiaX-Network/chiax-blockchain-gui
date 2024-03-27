@@ -13,10 +13,7 @@ import FarmCardNotAvailable from './FarmCardNotAvailable';
 
 const MOJO_PER_XXCH = 1_000_000_000_000;
 function getBlockRewardByHeight(height: number) {
-  if (height === 0) {
-    return 1_000_000 * MOJO_PER_XXCH;
-  }
-  return calculateReward(height);
+  return calculateReward(height) * MOJO_PER_XXCH;
 }
 
 export default React.memo(FarmingRewardsCards);
@@ -93,7 +90,7 @@ function FarmingRewardsCards() {
 
     const estimatedDailyXXCH = new BigNumber(86_400)
       .div(expectedTimeToWinSeconds)
-      .multipliedBy(getBlockRewardByHeight(data.peak?.height??0))
+      .multipliedBy(getBlockRewardByHeight(data.peak?.height))
       .dp(0);
 
     return (
@@ -121,7 +118,7 @@ function FarmingRewardsCards() {
 
     const estimatedMonthlyXXCH = new BigNumber(86_400 * 31)
       .div(expectedTimeToWinSeconds)
-      .multipliedBy(getBlockRewardByHeight(data.peak?.height??0))
+      .multipliedBy(getBlockRewardByHeight(data.peak?.height))
       .dp(0);
 
     return (

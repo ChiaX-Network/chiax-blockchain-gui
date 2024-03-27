@@ -1,6 +1,4 @@
 type FarmedAmount = {
-  stakeFarmRewardAmount: number;
-  stakeInterestRewardAmount: number;
   farmedAmount: number;
   farmerRewardAmount: number;
   feeAmount: number;

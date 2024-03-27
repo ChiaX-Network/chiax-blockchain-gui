@@ -11,7 +11,7 @@
   },
   "build": {
     "productName": "xxch",
-    "appId": "net.xxch.blockchain",
+    "appId": "cc.xxch.blockchain",
     "asar": true,
     "asarUnpack": "**/daemon/**",
     "npmRebuild": false,
@@ -114,7 +114,10 @@
         "--rpm-rpmbuild-define=debug_package %{nil}",
         "--rpm-rpmbuild-define=__os_install_post /usr/lib/rpm/brp-compress %{nil}",
         "--rpm-attr=4755,root,root:/opt/xxch/chrome-sandbox",
-        "--rpm-tag=Recommends: libxcrypt-compat"
+        "--rpm-tag=Recommends: libxcrypt-compat",
+        "--directories=/opt/xxch",
+        "--rpm-tag=Requires(pre): findutils",
+        "--before-install=../../../build_scripts/assets/rpm/before-install.sh"
       ]
     }
   },
@@ -162,7 +165,7 @@
     "@rehooks/local-storage": "2.4.4",
     "@walletconnect/sign-client": "2.10.0",
     "@walletconnect/utils": "2.10.0",
-    "axios": "1.4.0",
+    "axios": "1.6.0",
     "bech32": "2.0.0",
     "bignumber.js": "9.1.1",
     "byte-size": "8.1.1",
@@ -245,7 +248,7 @@
     "cross-env": "7.0.3",
     "date-and-time": "2.4.3",
     "css-loader": "6.8.1",
-    "electron": "25.9.0",
+    "electron": "27.0.0",
     "electron-devtools-assembler": "1.2.0",
     "electron-playwright-helpers": "^1.6.0",
     "electron-winstaller": "5.1.0",
@@ -277,5 +280,5 @@
       "last 1 safari version"
     ]
   },
-  "version": "2.1.1"
+  "version": "2.1.4"
 }

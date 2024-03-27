@@ -125,6 +125,7 @@ function StakeAddressFields() {
     </>
   );
 }
+
 function ProfileFields() {
   const { control } = useFormContext();
   const { fields, append, remove } = useFieldArray({
@@ -256,6 +257,7 @@ export default function ContactEdit() {
     defaultValues: {
       name: contact.name,
       addresses: contact.addresses,
+      stakeAddresses: contact.stakeAddresses,
       dids: contact.dids,
       domains: contact.domainNames,
       notes: '',
@@ -273,7 +275,7 @@ export default function ContactEdit() {
     const filteredStakeAddresses = data.stakeAddresses.filter((item) => item.name.length > 0 || item.address.length > 0);
     const filteredProfiles = data.dids.filter((item) => item.name.length > 0 || item.did.length > 0);
     const filteredDomains = data.domains.filter((item) => item.name.length > 0 || item.domain.length > 0);
-    if (filteredAddresses.length === 0) throw new Error('At least one Address must be provided to create contact');
+    if (filteredAddresses.length === 0 && filteredStakeAddresses.length === 0) throw new Error('At least one Address must be provided to create contact');
     filteredAddresses.forEach((entry) => {
       try {
         if (entry.address[4] === '1') {
@@ -292,14 +294,14 @@ export default function ContactEdit() {
           throw new Error();
         }
       } catch (err) {
-        throw new Error(`${entry.address} is not a valid stake address`);
+        throw new Error(`${entry.address} is not a valid address`);
       }
       addressBook.forEach((abContact) => {
         if (abContact.contactId.toString() !== contactId) {
-          abContact.stakeAddresses.forEach((contactAddress) => {
+          abContact.addresses.forEach((contactAddress) => {
             if (contactAddress.address === entry.address) {
               throw new Error(
-                `The stake address ${entry.address} is already assigned to an existing contact: ${abContact.name}`
+                `The address ${entry.address} is already assigned to an existing contact: ${abContact.name}`
               );
             }
           });
@@ -308,8 +310,8 @@ export default function ContactEdit() {
     });
     filteredStakeAddresses.forEach((entry) => {
       try {
-        if (entry.address[4] === '1') {
-          if (entry.address.slice(0, 4).toLowerCase() !== 'dpos') {
+        if (entry.address[10] === '1') {
+          if (entry.address.slice(0, 10).toLowerCase() !== 'dpos:xxch:') {
             throw new Error();
           } else if (fromBech32m(entry.address).length !== 64) {
             throw new Error();
@@ -334,7 +336,7 @@ export default function ContactEdit() {
     });
     filteredProfiles.forEach((entry) => {
       try {
-        if (entry.did.slice(0, 10).toLowerCase() !== 'did:xxch:') {
+        if (entry.did.slice(0, 13).toLowerCase() !== 'did:xxch:') {
           throw new Error();
         } else if (fromBech32m(entry.did).length !== 64) {
           throw new Error();

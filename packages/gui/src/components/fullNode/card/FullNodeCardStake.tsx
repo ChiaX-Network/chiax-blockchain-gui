@@ -9,10 +9,11 @@ export default function FullNodeCardStake() {
   const stakeFarm = data?.stakeFarm ?? 0;
   const stakeFarmCalc = data?.stakeFarmCalc ?? 0;
   const stakeLock = data?.stakeLock ?? 0;
+  const stakeLockCalc = data?.stakeLockCalc ?? 0;
 
   return (
     <>
-    <Grid xs={12} sm={6} md={4} item>
+    <Grid xs={12} sm={6} md={3} item>
       <CardSimple
         loading={isLoading}
         valueColor="textPrimary"
@@ -21,7 +22,7 @@ export default function FullNodeCardStake() {
         error={error}
       />
     </Grid>
-    <Grid xs={12} sm={6} md={4} item>
+    <Grid xs={12} sm={6} md={3} item>
       <CardSimple
         loading={isLoading}
         valueColor="textPrimary"
@@ -29,14 +30,22 @@ export default function FullNodeCardStake() {
         value={<FormatLargeNumber value={stakeFarm} />}
         error={error} />
     </Grid>
-    <Grid xs={12} sm={6} md={4} item>
+    <Grid xs={12} sm={6} md={3} item>
       <CardSimple
         loading={isLoading}
         valueColor="textPrimary"
         title={<Trans>Total Network Lock</Trans>}
-        value={<FormatLargeNumber value={stakeLock} />}
+        value={<FormatLargeNumber value={stakeLockCalc} />}
         error={error}
       />
+    </Grid>
+    <Grid xs={12} sm={6} md={3} item>
+      <CardSimple
+        loading={isLoading}
+        valueColor="textPrimary"
+        title={<Trans>Total Network Real Lock</Trans>}
+        value={<FormatLargeNumber value={stakeLock} />}
+        error={error} />
     </Grid>
     </>
   );

@@ -78,7 +78,7 @@ export default function FarmFullNodeConnections() {
       tooltip={
         <Trans>
           {'The full node that your farmer is connected to is below. '}
-          <Link target="_blank" href="https://github.com/Chiax-Network/xxch-blockchain/wiki/Network-Architecture">
+          <Link target="_blank" href="https://github.com/Chia-Network/chia-blockchain/wiki/Network-Architecture">
             Learn more
           </Link>
         </Trans>

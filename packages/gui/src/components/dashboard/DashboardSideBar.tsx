@@ -40,6 +40,7 @@ export default function DashboardSideBar(props: DashboardSideBarProps) {
   const [enableOffers] = useLocalStorage<boolean>('enable-offers', false);
   const [enablePool] = useLocalStorage<boolean>('enable-pool', false);
 
+
   return (
     <Flex height="100%" flexDirection="column">
       <StyledItemsContainer>
@@ -67,12 +68,12 @@ export default function DashboardSideBar(props: DashboardSideBarProps) {
             />
           )}
           {enableOffers && (
-          <SideBarItem
-            to="/dashboard/offers"
-            icon={OffersIcon}
-            title={<Trans>Offers</Trans>}
-            data-testid="DashboardSideBar-offers"
-          />
+            <SideBarItem
+              to="/dashboard/offers"
+              icon={OffersIcon}
+              title={<Trans>Offers</Trans>}
+              data-testid="DashboardSideBar-offers"
+            />
           )}
           <SideBarItem
             to="/dashboard/addressbook"
@@ -120,12 +121,12 @@ export default function DashboardSideBar(props: DashboardSideBarProps) {
             />
             */}
               {enablePool && (
-              <SideBarItem
-                to="/dashboard/pool"
-                icon={PoolingIcon}
-                title={<Trans>Pooling</Trans>}
-                data-testid="DashboardSideBar-pooling"
-              />
+                <SideBarItem
+                  to="/dashboard/pool"
+                  icon={PoolingIcon}
+                  title={<Trans>Pooling</Trans>}
+                  data-testid="DashboardSideBar-pooling"
+                />
               )}
             </>
           )}

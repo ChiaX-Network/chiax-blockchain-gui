@@ -21,8 +21,7 @@ export default function NewerAppVersionAvailable(props: NewerAppVersionAvailable
   const {
     latestVersion,
     isLoading: isLoadingVersion,
-    downloadPathUrl,
-    downloadExeUrl,
+    downloadUrl,
     releaseNotesUrl,
     blogUrl,
   } = useGetLatestVersionFromWebsite(false);
@@ -110,22 +109,10 @@ export default function NewerAppVersionAvailable(props: NewerAppVersionAvailable
           >
             <Trans>Close</Trans>
           </Button>
-          {!isLoadingVersion && newVersionAvailable && downloadExeUrl && (
+          {!isLoadingVersion && newVersionAvailable && downloadUrl && (
             <Button
               onClick={() => {
-                openExternal(downloadExeUrl);
-              }}
-              color="primary"
-              variant="contained"
-              style={{ marginBottom: '8px', marginRight: '8px' }}
-            >
-              <Trans>Go To Download</Trans>
-            </Button>
-          )}
-          {!isLoadingVersion && newVersionAvailable && downloadPathUrl && (
-            <Button
-              onClick={() => {
-                openExternal(downloadPathUrl);
+                openExternal(downloadUrl);
               }}
               color="primary"
               variant="contained"

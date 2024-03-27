@@ -68,7 +68,7 @@ export default function ContactSummary() {
     }
     return (
       <Flex flexDirection="column" gap={3} flexGrow={1}>
-        <Typography variant="h6"><Trans>Addresses</Trans></Typography>
+        <Typography variant="h6">Addresses</Typography>
         <Flex flexDirection="column" gap={3} flexGrow={1}>
           {contact.addresses.map((addressInfo) => (
             <TextField
@@ -124,7 +124,7 @@ export default function ContactSummary() {
     }
     return (
       <Flex flexDirection="column" gap={3} flexGrow={1}>
-        <Typography variant="h6"><Trans>Profiles</Trans></Typography>
+        <Typography variant="h6">Profiles</Typography>
         <Flex flexDirection="column" gap={3} flexGrow={1}>
           {contact.dids.map((didInfo) => (
             <TextField
@@ -152,7 +152,7 @@ export default function ContactSummary() {
     }
     return (
       <Flex flexDirection="column" gap={3} flexGrow={1}>
-        <Typography variant="h6"><Trans>Domain Names</Trans></Typography>
+        <Typography variant="h6">Domain Names</Typography>
         <Flex flexDirection="column" gap={3} flexGrow={1}>
           {contact.domainNames.map((domainInfo) => (
             <TextField

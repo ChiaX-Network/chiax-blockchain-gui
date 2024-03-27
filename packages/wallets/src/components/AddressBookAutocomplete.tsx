@@ -40,12 +40,6 @@ export default function AddressBookAutocomplete(props: Props) {
           const optionStr = `${contact.emoji} ${nameStr} | ${addNameStr}`;
           contactList.push({ label: optionStr, id: addressInfo.address });
         });
-      } else if (getType === 'stake') {
-        contact.stakeAddresses.forEach((stakeInfo) => {
-          const addNameStr = JSON.stringify(stakeInfo.name).slice(1, -1);
-          const optionStr = `${contact.emoji} ${nameStr} | ${addNameStr}`;
-          contactList.push({ label: optionStr, id: stakeInfo.address });
-        });
       } else if (getType === 'did') {
         contact.dids.forEach((didInfo) => {
           const didNameStr = JSON.stringify(didInfo.name).slice(1, -1);
@@ -68,7 +62,7 @@ export default function AddressBookAutocomplete(props: Props) {
         renderInput={(params) => (
           <TextField
             autoComplete="off"
-            label={getType === 'stake' ? <Trans>Stake Address</Trans> : <Trans>Address or Contact</Trans>}
+            label={<Trans>Address or Contact</Trans>}
             required={required}
             onBlur={onBlur}
             onChange={(_e) => handleChange(_e.target.value)}

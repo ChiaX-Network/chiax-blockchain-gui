@@ -1453,6 +1453,7 @@ export const walletApi = apiWithTag.injectEndpoints({
 
     spendClawbackCoins: mutation(build, WalletService, 'spendClawbackCoins'),
 
+
     findPoolNFT: mutation(build, Stake, 'findPoolNFT'),
 
     recoverPoolNFT: mutation(build, Stake, 'recoverPoolNFT', {
@@ -1587,7 +1588,7 @@ export const walletApi = apiWithTag.injectEndpoints({
             }),
           };
         } catch (error: any) {
-          console.log('error trx', error);
+          console.error('error trx', error);
           return {
             error,
           };
@@ -1597,6 +1598,9 @@ export const walletApi = apiWithTag.injectEndpoints({
       },
       invalidatesTags: [{ type: 'Transactions', id: 'LIST' }],
     }),
+
+    spendWithdrawCoins: mutation(build, Stake, 'spendWithdrawCoins'),
+
   }),
 });
 
@@ -1719,11 +1723,13 @@ export const {
   useSetAutoClaimMutation,
   useGetAutoClaimQuery,
   useSpendClawbackCoinsMutation,
+
   // stake
   useSetAutoWithdrawStakeMutation,
   useGetAutoWithdrawStakeQuery,
   useStakeInfoQuery,
   useStakeSendMutation,
+  useSpendWithdrawCoinsMutation,
 
   useFindPoolNFTMutation,
   useRecoverPoolNFTMutation,

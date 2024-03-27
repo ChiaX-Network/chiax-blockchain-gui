@@ -48,7 +48,7 @@ export default function SettingsApp(props: SettingsAppProps) {
   async function handleOpenFAQURL(): Promise<void> {
     try {
       const { shell } = window as unknown as { shell: Shell };
-      await shell.openExternal('https://github.com/Chiax-Network/xxch-blockchain/wiki/FAQ');
+      await shell.openExternal('https://github.com/Chia-Network/chia-blockchain/wiki/FAQ');
     } catch (error: any) {
       showError(error);
     }

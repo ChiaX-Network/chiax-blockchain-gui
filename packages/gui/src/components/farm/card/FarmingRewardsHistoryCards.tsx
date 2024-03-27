@@ -119,13 +119,13 @@ function FarmingRewardsHistoryCards() {
           } loading={isLoading} error={error} />
         </Grid>
         <Grid xs={12} sm={6} md={4} item>
-          <CardSimple title={<Trans>Farmer Reward</Trans>} value={
-            `${mojoToXxchLocaleString(data?.farmerRewardAmount, locale)} ${currencyCode}`
+          <CardSimple title={<Trans>Lock Reward</Trans>} value={
+            `${mojoToXxchLocaleString(data?.stakeLockRewardAmount, locale)} ${currencyCode}`
           } loading={isLoading} error={error} />
         </Grid>
         <Grid xs={12} sm={6} md={4} item>
-          <CardSimple title={<Trans>Pool Reward</Trans>} value={
-            `${mojoToXxchLocaleString(data?.poolRewardAmount, locale)} ${currencyCode}`
+          <CardSimple title={<Trans>Farmer Reward</Trans>} value={
+            `${mojoToXxchLocaleString(data?.farmerRewardAmount, locale)} ${currencyCode}`
           } loading={isLoading} error={error} />
         </Grid>
         <Grid xs={12} sm={6} md={4} item>

@@ -11,11 +11,12 @@ export default function Fee(props: FeeProps) {
   return (
     <Amount {...props}>
       {({ value, mojo }) => {
-        const isHigh = mojo.gte('100000000000');
-        const isLow = mojo.gt('0') && mojo.lt('1');
+        const isStake = props.name === 'spendStakeFee';
+        const isHigh = isStake ? mojo.gte('1000000000000'): mojo.gte('100000000000');
+        const isLow = isStake ? mojo.lt('100000000000') : mojo.gt('0') && mojo.lt('1');
 
         if (!value) {
-          return <Trans>Recommended value: 0.000005</Trans>;
+          return <Trans>Recommended value: {isStake ? 0.1 : 0.000005}</Trans>;
         }
 
         if (isHigh) {

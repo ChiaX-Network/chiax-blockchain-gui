@@ -62,7 +62,7 @@ export default function MyContact() {
     if (!isLoadingWKAddresses && keyList.length > 0) {
       return (
         <Flex flexDirection="column" gap={3} flexGrow={1}>
-          <Typography variant="h6"><Trans>Addresses</Trans></Typography>
+          <Typography variant="h6">Addresses</Typography>
           <Flex flexDirection="column" gap={4} flexGrow={1}>
             {keyList.map((key) => (
               <div>

@@ -289,7 +289,7 @@ export default function WalletHistory(props: Props) {
         TransactionType.INCOMING_CLAWBACK_SEND,
         TransactionType.INCOMING_STAKE_FARM_RECEIVE,
         TransactionType.INCOMING_STAKE_LOCK_RECEIVE,
-        TransactionType.STAKE_FARM_WITHDRAW,
+        TransactionType.STAKE_WITHDRAW,
         TransactionType.STAKE_LOCK_WITHDRAW,
       ],
     },

@@ -6,11 +6,11 @@ import FullNodeCardDifficulty from './FullNodeCardDifficulty';
 import FullNodeCardNetworkName from './FullNodeCardNetworkName';
 import FullNodeCardPeakHeight from './FullNodeCardPeakHeight';
 import FullNodeCardPeakTime from './FullNodeCardPeakTime';
-import FullNodeCardStake from "./FullNodeCardStake";
 import FullNodeCardStatus from './FullNodeCardStatus';
 import FullNodeCardTotalIterations from './FullNodeCardTotalIterations';
 import FullNodeCardVDFSubSlotIterations from './FullNodeCardVDFSubSlotIterations';
 import FullNodeEstimatedNetworkSpace from './FullNodeEstimatedNetworkSpace';
+import FullNodeCardStake from "./FullNodeCardStake";
 
 export default function FullNodeCards() {
   return (
